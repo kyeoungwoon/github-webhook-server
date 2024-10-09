@@ -1,0 +1,10 @@
+services:
+  github-webhook-to-telegram:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    ports:
+      - "10002:10002"
+    volumes:
+      - ./logs:/app/logs
