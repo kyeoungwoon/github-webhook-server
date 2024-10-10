@@ -19,19 +19,12 @@ GitHub Repository에 발생한 변경사항들을 Telegram을 통해 알람을 �
    - **SSL verification**: 이 코드에서는 SSL 인증서를 포함하지 않으므로, 추가로 설정하시지 않았다면 `Disable` 해줍니다.
    - **Which events would you like to trigger this webhook?**: `Send me everything`
 
-1. 두 개의 config.json 파일이 필요합니다.  
+1. 프로젝트의 코드가 있는 root directory에 config.json 파일을 추가해주세요.  
     `./config.json`
 
    ```json
    {
-     "GITHUB_WEBHOOK_SECRET": "YOUR SECRET"
-   }
-   ```
-
-   `./telegram_bot/config.json`
-
-   ```json
-   {
+     "GITHUB_WEBHOOK_SECRET": "YOUR SECRET",
      "TELEGRAM_BOT_TOKEN": "YOUR TOKEN",
      "CHAT_ID": "YOUR CHAT ID"
    }
@@ -48,6 +41,9 @@ GitHub Repository에 발생한 변경사항들을 Telegram을 통해 알람을 �
 
 - **v1.0.0** - _2024/10/10_
   - Initial project release
+- **v1.1.0** - _2024/10/11_
+  - Merged two `config.json` files into one
+  - fixed docker-compose file to mount `config.json` file
 
 ## License
 
