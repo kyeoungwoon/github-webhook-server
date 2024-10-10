@@ -2,7 +2,7 @@ import requests
 import json
 
 # config.json 파일 경로
-config_file = 'telegram_bot/config.json'
+config_file = './config.json'
 
 # JSON 파일 불러오기
 with open(config_file, 'r') as file:

@@ -8,3 +8,4 @@ services:
       - "10002:10002"
     volumes:
       - ./logs:/app/logs
+      - ./config.json:/app/config.json
