@@ -101,12 +101,15 @@ def github_webhook():
             # push 이벤트 처리
             payload = request.json
             ref = payload.get('ref')
-            commits_message = payload.get('commits').get('message')
-            commits_username = payload.get('commits').get('username')
-            commits_timestamp = payload.get('commits').get('timestamp')
+            commits = payload.get('commits')[0]
+            commits_message = commits.get('message')
+            commits_username = commits.get('author').get('name')
+            commits_timestamp = commits.get('timestamp')
             pusher = payload.get('pusher', [])
+            repo = payload.get("repository").get("name")
 
             message = (
+                f"repo : {repo}"
                 f"[event_type : {event_type}]\n"
                 f"[pusher : {pusher}] pushed to [ref : {ref}]\n"
                 f"commit message : {commits_message}\n"
@@ -130,8 +133,10 @@ def github_webhook():
             pr_assignees = ', '.join([assignee.get('login') for assignee in pr.get('assignees', [])])
             pr_requested_reviewers = ', '.join([reviewer.get('login') for reviewer in pr.get('requested_reviewers', [])])
             sender = payload.get('sender').get('login')
+            repo = payload.get("repository").get("name")
 
             message = (
+                f"repo : {repo}"
                 f"[event_type : {event_type}]\n"
                 f"[sender : {sender}] [action : {action}]\n"
                 f"Pull Request:\n"
@@ -153,8 +158,10 @@ def github_webhook():
             sender = payload.get('sender').get('login')
             ref = payload.get('ref')
             ref_type = payload.get('ref_type')
+            repo = payload.get("repository").get("name")
 
             message = (
+                f"repo : {repo}"
                 f"[event_type : {event_type}]\n"
                 f"[sender : {sender}] created\n"
                 f"  Ref Type : {ref_type}\n"
@@ -179,8 +186,10 @@ def github_webhook():
             issue_updated_at = payload.get('issue').get('updated_at')
             issue_closed_at = payload.get('issue').get('closed_at')
             sender = payload.get('sender').get('login')
+            repo = payload.get("repository").get("name")
 
             message = (
+                f"repo : {repo}"
                 f"[event_type : {event_type}]\n"
                 f"[sender : {sender}] [action : {action}]\n"
                 f"Issue:\n"
@@ -208,8 +217,10 @@ def github_webhook():
             comment_user = payload.get('comment').get('user').get('login')
             comment_created_at = payload.get('comment').get('created_at')
             sender = payload.get('sender').get('login')
+            repo = payload.get("repository").get("name")
 
             message = (
+                f"repo : {repo}"
                 f"[event_type : {event_type}]\n"
                 f"[sender : {sender}] [action : {action}]\n"
                 f"Comment:\n"
